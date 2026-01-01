@@ -26,16 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: echo 'Perform build for Java (Gradle)'
+        run: npm ci && npm run build
       - name: Lint
-        run: echo 'Run linter for Java (Gradle)'
+        run: npm run lint
       - name: Test
-        run: echo 'Run tests for Java (Gradle)'
+        run: npm test --silent
       - name: Codescan
-        run: echo 'Run code scanning for Java (Gradle)'
+        run: npm run snyk || echo 'Run your code scanning tool here'
       - name: Package
-        run: echo 'Package Java (Gradle)'
+        run: docker build -t $REGISTRY/$IMAGE:$TAG .
       - name: Publish
-        run: echo 'Publish artifacts for Java (Gradle)'
+        run: docker push $REGISTRY/$IMAGE:$TAG
       - name: Deploy
-        run: echo 'Deploy Java (Gradle) (implement your deploy step)'
+        run: kubectl apply -f k8s/deployment.yaml --namespace=${NAMESPACE:-default}
