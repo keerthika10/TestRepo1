@@ -26,16 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: echo 'Perform build for Dockerized App'
+        run: echo 'Perform build for Python'
       - name: Lint
-        run: echo 'Run linter for Dockerized App'
+        run: echo 'Run linter for Python'
       - name: Test
-        run: echo 'Run tests for Dockerized App'
+        run: echo 'Run tests for Python'
       - name: Codescan
-        run: echo 'Run code scanning for Dockerized App'
+        run: echo 'Run code scanning for Python'
       - name: Package
-        run: echo 'Package Dockerized App'
+        run: echo 'Package Python'
       - name: Publish
-        run: echo 'Publish artifacts for Dockerized App'
+        run: echo 'Publish artifacts for Python'
       - name: Deploy
-        run: echo 'Deploy Dockerized App (implement your deploy step)'
+        run: echo 'Deploy Python (implement your deploy step)'
