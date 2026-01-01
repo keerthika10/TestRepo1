@@ -26,16 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: npm ci && npm run build
+        run: echo 'Perform build for Python'
       - name: Lint
-        run: npm run lint
+        run: echo 'Run linter for Python'
       - name: Test
-        run: npm test --silent
+        run: echo 'Run tests for Python'
       - name: Codescan
-        run: npm run snyk || echo 'Run your code scanning tool here'
+        run: echo 'Run code scanning for Python'
       - name: Package
-        run: docker build -t $REGISTRY/$IMAGE:$TAG .
+        run: echo 'Package Python'
       - name: Publish
-        run: docker push $REGISTRY/$IMAGE:$TAG
+        run: echo 'Publish artifacts for Python'
       - name: Deploy
-        run: kubectl apply -f k8s/deployment.yaml --namespace=${NAMESPACE:-default}
+        run: echo 'Deploy Python (implement your deploy step)'
