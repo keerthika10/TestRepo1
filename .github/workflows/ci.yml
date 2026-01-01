@@ -26,16 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: echo 'Perform build for Dockerized App'
+        run: echo 'Perform build for Kubernetes App'
       - name: Lint
-        run: echo 'Run linter for Dockerized App'
+        run: echo 'Run linter for Kubernetes App'
       - name: Test
-        run: echo 'Run tests for Dockerized App'
+        run: echo 'Run tests for Kubernetes App'
       - name: Codescan
-        run: echo 'Run code scanning for Dockerized App'
+        run: echo 'Run code scanning for Kubernetes App'
       - name: Package
-        run: echo 'Package Dockerized App'
+        run: echo 'Package Kubernetes App'
       - name: Publish
-        run: echo 'Publish artifacts for Dockerized App'
+        run: echo 'Publish artifacts for Kubernetes App'
       - name: Deploy
-        run: echo 'Deploy Dockerized App (implement your deploy step)'
+        run: echo 'Deploy Kubernetes App (implement your deploy step)'
