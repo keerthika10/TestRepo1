@@ -3,39 +3,52 @@ name: CI
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Deploy environment"
-        required: false
-        default: "staging"
 
 jobs:
-  build-test-deploy:
+  node.js:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      actions: read
     env:
       REGISTRY: ${REGISTRY:-registry.example.com}
       IMAGE: ${IMAGE:-my-app}
       TAG: ${TAG:-$CI_COMMIT_SHA}
-      NAMESPACE: default
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build
-        run: npm ci && npm run build
-      - name: Lint
-        run: npm run lint
-      - name: Test
-        run: npm test --silent
-      - name: Codescan
-        run: npm run snyk || echo 'Run your code scanning tool here'
-      - name: Package
-        run: docker build -t $REGISTRY/$IMAGE:$TAG .
-      - name: Publish
-        run: docker push $REGISTRY/$IMAGE:$TAG
-      - name: Deploy
-        run: kubectl apply -f k8s/deployment.yaml --namespace=${NAMESPACE:-default}
+
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+
+      
+      - name: Build (fallback)
+        run: |
+          npm ci && npm run build
+      
+      - name: Lint (fallback)
+        run: |
+          npm run lint
+      
+      - name: Test (fallback)
+        run: |
+          npm test --silent
+      
+      - name: Codescan (fallback)
+        run: |
+          npm run snyk || echo 'Run your code scanning tool here'
+      
+      - name: Package (fallback)
+        run: |
+          docker build -t $REGISTRY/$IMAGE:$TAG .
+      
+      - name: Publish (fallback)
+        run: |
+          docker push $REGISTRY/$IMAGE:$TAG
+      
+      - name: Deploy (fallback)
+        run: |
+          kubectl apply -f k8s/deployment.yaml --namespace=${NAMESPACE:-default}
+      
