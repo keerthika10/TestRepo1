@@ -1,21 +1,24 @@
-pipeline {
-    agent any
-    stages {
-        stage('Login to Azure') {
-            steps {
-                script {
-                    withCredentials([[$class: 'AzureServicePrincipal', 
-                                     credentialsId: 'your-service-principal-id', 
-                                     subscriptionId: 'your-subscription-id']]) {
-                        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
-                    }
-                }
-            }
-        }
-        stage('Show Azure Account') {
-            steps {
-                sh 'az account show'
-            }
-        }
-    }
-}
+name: Azure Login and Account Show
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  azure-login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/setup-azure@v1
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Show Azure Account
+        run: az account show
