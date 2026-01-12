@@ -14,23 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
       - name: Run Fibonacci script
         run: |
-          python -c "
-          def fibonacci(n):
-              a, b = 0, 1
-              for _ in range(n):
-                  print(a, end=' ')
-                  a, b = b, a + b
-          fibonacci(10)
-          "
+          echo "Fibonacci Series:"
+          a=0
+          b=1
+          for (( i=0; i<10; i++ ))
+          do
+            echo $a
+            fn=$((a + b))
+            a=$b
+            b=$fn
+          done
