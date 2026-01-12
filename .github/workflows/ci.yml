@@ -1,54 +1,15 @@
+name: Print Hello Keerthika
 
-name: CI
-
-on:
+on: 
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+
 jobs:
-  node.js:
+  echo_job:
     runs-on: ubuntu-latest
-    env:
-      REGISTRY: ${REGISTRY:-registry.example.com}
-      IMAGE: ${IMAGE:-my-app}
-      TAG: ${TAG:-$CI_COMMIT_SHA}
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
-
-      
-      - name: Build   
-        run: |
-          npm install && npm run build
-      
-      - name: Lint   
-        run: |
-          npm run lint
-      
-      - name: Test   
-        run: |
-          npm test
-      
-      - name: Codescan   
-        run: |
-          echo 'Running code scan for Node.js application'
-      
-      - name: Package   
-        run: |
-          npm install && npm run build
-      
-      - name: Publish   
-        run: |
-          echo 'Publishing Node.js application...'
-      
-      - name: Deploy   
-        run: |
-          echo 'Deploying Node.js application...'
-      
+      - name: Echo Hello Keerthika
+        run: echo "hello keerthika"
