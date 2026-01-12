@@ -7,5 +7,5 @@ jobs:
   print_message:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Message
+      - name: Print Message
         run: echo "hello keerthika"
