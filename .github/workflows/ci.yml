@@ -1,54 +1,21 @@
-
-name: CI
-
-on:
-  workflow_dispatch:
-
-jobs:
-  node.js:
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ${REGISTRY:-registry.example.com}
-      IMAGE: ${IMAGE:-my-app}
-      TAG: ${TAG:-$CI_COMMIT_SHA}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
-
-      
-      - name: Build   
-        run: |
-          npm install && npm run build
-      
-      - name: Lint   
-        run: |
-          npm run lint
-      
-      - name: Test   
-        run: |
-          npm test
-      
-      - name: Codescan   
-        run: |
-          echo 'Running code scan for Node.js application'
-      
-      - name: Package   
-        run: |
-          npm install && npm run build
-      
-      - name: Publish   
-        run: |
-          echo 'Publishing Node.js application...'
-      
-      - name: Deploy   
-        run: |
-          echo 'Deploying Node.js application...'
-      
+pipeline {
+    agent any
+    stages {
+        stage('Login to Azure') {
+            steps {
+                script {
+                    withCredentials([[$class: 'AzureServicePrincipal', 
+                                     credentialsId: 'your-service-principal-id', 
+                                     subscriptionId: 'your-subscription-id']]) {
+                        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+                    }
+                }
+            }
+        }
+        stage('Show Azure Account') {
+            steps {
+                sh 'az account show'
+            }
+        }
+    }
+}
