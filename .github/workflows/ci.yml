@@ -1,4 +1,4 @@
-name: Print Hello Keerthika
+name: Fibonacci Series Workflow
 
 on: 
   workflow_dispatch:
@@ -8,8 +8,23 @@ on:
       - main
 
 jobs:
-  echo_job:
+  fibonacci:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Hello Keerthika
-        run: echo "Hello Keerthika"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Run Fibonacci script
+        run: |
+          def fibonacci(n):
+              a, b = 0, 1
+              for _ in range(n):
+                  print(a, end=' ')
+                  a, b = b, a + b
+
+          fibonacci(10)
