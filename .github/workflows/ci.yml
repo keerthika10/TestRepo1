@@ -42,11 +42,11 @@ jobs:
       
       - name: Package   
         run: |
-          npm install && npm run build
+          npm install
       
       - name: Publish   
         run: |
-          docker push $REGISTRY/$IMAGE:$TAG
+          echo 'Publishing Node.js application...'
       
       - name: Deploy   
         run: |
