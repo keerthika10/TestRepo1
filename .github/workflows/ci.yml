@@ -1,28 +1,54 @@
-name: Fibonacci Series Workflow
+
+name: CI
 
 on:
   workflow_dispatch:
 
-  push:
-    branches:
-      - main
-
 jobs:
-  fibonacci:
+  node.js:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    env:
+      REGISTRY: ${REGISTRY:-registry.example.com}
+      IMAGE: ${IMAGE:-my-app}
+      TAG: ${TAG:-$CI_COMMIT_SHA}
 
-      - name: Run Fibonacci script
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+
+      
+      - name: Build   
         run: |
-          echo "Fibonacci Series:"
-          a=0
-          b=1
-          for (( i=0; i<10; i++ ))
-          do
-            echo $a
-            fn=$((a + b))
-            a=$b
-            b=$fn
-          done
+          npm install && npm run build
+      
+      - name: Lint   
+        run: |
+          npm run lint
+      
+      - name: Test   
+        run: |
+          npm test
+      
+      - name: Codescan   
+        run: |
+          echo 'Running code scan for Node.js application'
+      
+      - name: Package   
+        run: |
+          npm install && npm run build
+      
+      - name: Publish   
+        run: |
+          docker push $REGISTRY/$IMAGE:$TAG
+      
+      - name: Deploy   
+        run: |
+          echo 'Deploying Node.js application...'
+      
