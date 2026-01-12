@@ -1,19 +1,13 @@
-name: Azure Login and Account Show
+name: Echo Hi World
 
-on:
-  workflow_dispatch:
+on: 
+  push:
+    branches:
+      - main
 
 jobs:
-  azure-login:
+  echo_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Show Azure Account
-        run: az account show
+      - name: Echo Hi World
+        run: echo "Hi World"
