@@ -1,11 +1,15 @@
-name: Echo Hello Keerthika
+name: Print Hello Keerthika
 
-on:
+on: 
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+
 jobs:
-  print_message:
+  echo_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Message
-        run: echo "hello keerthika"
+      - name: Echo Hello Keerthika
+        run: echo "Hello Keerthika"
