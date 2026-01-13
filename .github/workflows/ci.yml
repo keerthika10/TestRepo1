@@ -1,6 +1,6 @@
 name: Fibonacci Series Workflow
 
-on: 
+on:
   workflow_dispatch:
 
   push:
