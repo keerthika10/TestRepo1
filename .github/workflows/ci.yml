@@ -1,6 +1,6 @@
-name: Fibonacci Series Workflow
+name: Hello World Workflow
 
-on:
+on: 
   workflow_dispatch:
 
   push:
@@ -8,21 +8,11 @@ on:
       - main
 
 jobs:
-  fibonacci:
+  hello_world:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Fibonacci script
-        run: |
-          echo "Fibonacci Series:"
-          a=0
-          b=1
-          for (( i=0; i<10; i++ ))
-          do
-            echo $a
-            fn=$((a + b))
-            a=$b
-            b=$fn
-          done
+      - name: Run Hello World
+        run: echo "Hello, World!"
