@@ -1,28 +1,30 @@
-name: Fibonacci Series Workflow
+
+name: CI
 
 on:
   workflow_dispatch:
 
-  push:
-    branches:
-      - main
-
 jobs:
-  fibonacci:
+  python:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    env:
+      REGISTRY: ${REGISTRY:-registry.example.com}
+      IMAGE: ${IMAGE:-my-app}
+      TAG: ${TAG:-$CI_COMMIT_SHA}
 
-      - name: Run Fibonacci script
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+
+      
+      - name: Create Fibonacci Series Pipeline   
         run: |
-          echo "Fibonacci Series:"
-          a=0
-          b=1
-          for (( i=0; i<10; i++ ))
-          do
-            echo $a
-            fn=$((a + b))
-            a=$b
-            b=$fn
-          done
+          echo 'def fibonacci(n): a, b = 0, 1; for _ in range(n): print(a); a, b = b, a + b; fibonacci(10)' > fibonacci.py && python3 fibonacci.py && echo 'No dependency files required for this workflow.'
+      
