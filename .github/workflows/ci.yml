@@ -1,18 +1,16 @@
-name: Hello World Workflow
+name: Greet User
 
-on: 
+on:
   workflow_dispatch:
-
-  push:
-    branches:
-      - main
+    inputs:
+      name:
+        description: 'Name of the user'
+        required: true
+        default: 'World'
 
 jobs:
-  hello_world:
+  greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run Hello World
-        run: echo "Hello, World!"
+      - name: Print Greeting
+        run: echo "Hello ${{ github.event.inputs.name }}"
