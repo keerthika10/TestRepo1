@@ -1,4 +1,4 @@
-name: Hello World Workflow
+name: Hello World 6th mar testing
 
 on: 
   workflow_dispatch:
@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
-        run: echo "Hello, World!"
+        run: echo "Hello, Keerthika!"
