@@ -1,7 +1,8 @@
-name: Hello World 6th mar testing
+name: Hello World Workflow
 
 on: 
   workflow_dispatch:
+
   push:
     branches:
       - main
@@ -10,5 +11,8 @@ jobs:
   hello_world:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Hello World
-        run: echo "Hello, Keerthika!"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Hello World
+        run: echo "Hello, World!"
