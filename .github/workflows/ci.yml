@@ -4,8 +4,8 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  print_hello_world:
+  print_hello:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
-        run: echo "hello world"
+        run: echo "Hello World"
