@@ -1,54 +1,11 @@
-
-name: CI
+name: Hello World Pipeline
+on: [push]
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello World
+        run: echo "Hello World"
 
 on:
   workflow_dispatch:
-
-jobs:
-  python:
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ${REGISTRY:-registry.example.com}
-      IMAGE: ${IMAGE:-my-app}
-      TAG: ${TAG:-$CI_COMMIT_SHA}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      
-
-      
-      - name: Build   
-        run: |
-          echo "No build step required for Python application"
-      
-      - name: Lint   
-        run: |
-          flake8 .
-      
-      - name: Test   
-        run: |
-          python -m unittest discover
-      
-      - name: CodeScan   
-        run: |
-          echo 'Running code scan for Python application'
-      
-      - name: Package   
-        run: |
-          python3 setup.py sdist bdist_wheel
-      
-      - name: Publish   
-        run: |
-          echo 'Publishing Python application...'
-      
-      - name: Deploy   
-        run: |
-          echo Deploy step for Python application is not fully specified
-      
