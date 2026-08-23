@@ -1,7 +1,7 @@
 name: Hello World Workflow
 on: [push]
 jobs:
-  say_hello:
+  print_hello:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
