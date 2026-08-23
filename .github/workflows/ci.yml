@@ -1,10 +1,7 @@
 name: Hello World Workflow
-on:
-  workflow_dispatch:
-  push:
-  workflow_dispatch:
+on: [push]
 jobs:
-  print_hello:
+  hello_world:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
