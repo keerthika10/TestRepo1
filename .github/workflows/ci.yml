@@ -1,7 +1,10 @@
-name: Hello World Workflow
-on: [push]
+name: Hello World Pipeline
+on:
+  workflow_dispatch:
+  push:
+  workflow_dispatch:
 jobs:
-  hello_world:
+  say_hello:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
