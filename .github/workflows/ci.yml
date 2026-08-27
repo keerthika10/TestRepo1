@@ -1,10 +1,13 @@
-name: Hello World Workflow
-on:
-  push:
-  workflow_dispatch:
+name: Hello World Pipeline
+on: [push, pull_request]
 jobs:
-  print_hello_world:
+  build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Print Hello World
         run: echo "Hello World"
+
+on:
+  workflow_dispatch:
